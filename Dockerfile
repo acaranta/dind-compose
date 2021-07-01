@@ -16,6 +16,7 @@ ADD ./wrapdocker /usr/local/bin/wrapdocker
 RUN chmod +x /usr/local/bin/wrapdocker
 
 RUN apt install -y python3-pip supervisor
+RUN pip3 install --upgrade pip
 RUN pip3 install docker-compose
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
