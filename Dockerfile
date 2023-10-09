@@ -1,6 +1,10 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 MAINTAINER Arthur Caranta <arthur@caranta.com>
+ENV DEBIAN_FRONTEND noninteractive
+ENV INITRD No
+
+RUN echo "Europe/Paris" > /etc/timezone #&& dpkg-reconfigure tzdata
 RUN apt-get update && apt-get install -y apt-transport-https ca-certificates curl iptables gnupg2
 
 ADD docker.list /etc/apt/sources.list.d
