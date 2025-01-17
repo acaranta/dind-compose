@@ -1,0 +1,8 @@
+---
+kind: template
+load: docker-build-multiarch.yaml
+data:
+  dockerfiledir: .
+  imagename: infra/dind-compose
+  imagetag: latest  
+  branches: ['master', 'main']
