@@ -7,11 +7,13 @@ ENV INITRD No
 RUN echo "Europe/Paris" > /etc/timezone #&& dpkg-reconfigure tzdata
 RUN apt-get update && apt-get install -y apt-transport-https ca-certificates curl iptables gnupg2
 
-ADD docker.list /etc/apt/sources.list.d
+# ADD docker.list /etc/apt/sources.list.d
+RUN echo "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/debian \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 RUN curl -o - https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg |apt-key add -
 
 # Let's start with some basic stuff.
-RUN apt-get update && apt-get install -y docker-ce docker-ce-cli:amd64
+RUN apt-get update && apt-get install -y docker-ce docker-ce-cli
 
 ADD ./dind /usr/local/bin/dind
 RUN chmod +x /usr/local/bin/dind
