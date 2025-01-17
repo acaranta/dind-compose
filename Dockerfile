@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 MAINTAINER Arthur Caranta <arthur@caranta.com>
 ENV DEBIAN_FRONTEND noninteractive
@@ -11,7 +11,7 @@ ADD docker.list /etc/apt/sources.list.d
 RUN curl -o - https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg |apt-key add -
 
 # Let's start with some basic stuff.
-RUN apt-get update && apt-get install -y docker-ce docker-ce-cli
+RUN apt-get update && apt-get install -y docker-ce docker-ce-cli:amd64
 
 ADD ./dind /usr/local/bin/dind
 RUN chmod +x /usr/local/bin/dind
